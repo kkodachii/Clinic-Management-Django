@@ -1,0 +1,54 @@
+{% load static %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="winter">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body style="font-family: 'Poppins', sans-serif;">
+
+    {% if messages %}
+                    <div class="toast messages top-0 z-50">
+                    {% for message in messages %}
+                        <div role="alert" class="alert {% if message.tags %} {{ message.tags }} {% else %} alert-success{% endif %}">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-6 w-6 shrink-0 stroke-current"
+                            fill="none"
+                            viewBox="0 0 24 24">
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span class="">{{ message }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+    <!-- Main Content -->
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        // Automatically remove toasts after 3 seconds
+        setTimeout(() => {
+            const toasts = document.querySelectorAll('.toast .alert');
+            toasts.forEach((toast) => toast.remove());
+        }, 3000);
+    
+    
+    </script>
+</body>
+</html>
